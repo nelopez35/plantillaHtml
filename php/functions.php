@@ -1,18 +1,18 @@
 <?php 
-	include 'db_functions.php';
-
-	switch ($_POST['function_name']) {
+	include 'Db.php';
+	$obj = new Consultas();
+	switch ($_POST['funcion']) {
 		case 'query':
-			query();
+			$obj->query();
 			break;
 		case 'insert':
-			insert($_POST[""]);
+			$obj->insert($_POST[""]);
 			break;
 		case 'update':
-			update($_POST[""]);
+			$obj->update($_POST[""]);
 			break;
 		case 'delete':
-			delete($_POST[""]);
+			$obj->delete($_POST[""]);
 			break;
 		
 		default:
@@ -20,16 +20,11 @@
 			break;
 	}
 
+class Consultas{
 
 
 	function query(){
-		$sql = "SELECT id,name,path FROM elevator";
-		$result = db_query($sql);
-		$json = array();
-		while($res = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-
-			array_push($json, $res);
-		};
+		
 		echo json_encode($json);
 		
 
@@ -50,5 +45,10 @@
 	function delete(){
 
 	}
+
+
+}
+
+	
 
  ?>
